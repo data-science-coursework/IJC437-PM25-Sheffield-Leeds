@@ -1,7 +1,13 @@
-## Running the analysis
+## Raw data
 
-1. Clone the repository.
-2. Open `pm25_analysis.R` in R or RStudio and run the script to clean and analyse the data.
-3. Run `pm25_plots.R` to generate the figures used in the report.
+This folder contains the raw PM2.5 monitoring data used in the analysis.  
+The datasets were obtained from UK air quality monitoring stations and include daily measurements from the following sites:
 
-Required R packages are listed at the top of each script.
+- Leeds Centre
+- Leeds Headingley Kerbside
+- Sheffield Barnsley Road
+- Sheffield Tinsley
+
+Columns not necessary for the coursework were removed from the datasets
+
+All cleaning, aggregation, and processing steps were performed using R scripts contained in the main repository.
