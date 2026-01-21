@@ -41,13 +41,25 @@ ggplot(pm25_seasonal_overall,
     y = expression("PM2.5 ("*mu*"g/m"^3*")")) + theme_minimal()
 
 # Create plot 3: Diurnal variation
+# firstly, change measurements from 24:00 hours to 0 hours
+pm25_diurnal <- pm25_hourly %>%
+  group_by(site_name, hour) %>%
+  summarise(
+    mean_pm25 = mean(pm25, na.rm = TRUE),
+    .groups = "drop" )
+
+pm25_diurnal <- pm25_diurnal %>%
+  mutate(
+    plot_hour = ifelse(hour == 24, 0, hour))
+
+#then create plot3
+
 ggplot(pm25_diurnal,
-       aes(x = plot_hour, y = mean_pm25, colour = site_name)) +
+ aes(x = plot_hour, y = mean_pm25, colour = site_name)) +
   geom_line(linewidth = 1.2) +
   scale_colour_manual(values = site_cols, name = "Monitoring site") +
-  scale_x_continuous(breaks = seq(0, 23, by = 3)) +
+  scale_x_continuous(breaks = seq(0, 23, by = 2)) +
   labs(
     title = "Diurnal variation in PM2.5 concentrations",
     x = "Hour of day",
-    y = expression("PM2.5 ("*mu*"g/m"^3*")")) +
-  theme_minimal()
+    y = expression("PM2.5 ("*mu*"g/m"^3*")")) + theme_minimal()
