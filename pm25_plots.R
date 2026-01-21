@@ -41,8 +41,8 @@ ggplot(pm25_seasonal_overall,
     y = expression("PM2.5 ("*mu*"g/m"^3*")")) + theme_minimal()
 
 # Create plot 3: Diurnal variation
-# firstly, change measurements from 24:00 hours to 0 hours
-pm25_diurnal <- pm25_hourly %>%
+# firstly, change measurements from 24:00 hours to 0 hours to match convention for reporting of midnight
+pm25_diurnal <- pm25_hourly %>% 
   group_by(site_name, hour) %>%
   summarise(
     mean_pm25 = mean(pm25, na.rm = TRUE),
