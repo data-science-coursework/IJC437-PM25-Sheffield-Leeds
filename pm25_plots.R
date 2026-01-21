@@ -28,8 +28,8 @@ ggplot(pm25_yearly,
 # Create plot 2: Seasonal means bar chart
 pm25_seasonal_overall <- pm25_seasonal_overall %>%
   mutate(
-    season = factor(season,
-                    levels = c("Winter", "Spring", "Summer", "Autumn")))
+   season = factor(season,
+    levels = c("Winter", "Spring", "Summer", "Autumn")))
 
 ggplot(pm25_seasonal_overall,
        aes(x = season, y = mean_pm25, fill = site_name)) +
