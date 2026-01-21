@@ -117,18 +117,23 @@ pm25_yearly <- pm25_daily %>%
     .groups = "drop")
 
 # 16. Conduct x3 regression models 
-# model 1
-lm(daily_mean ~ year * site_name, data = pm25_daily)
-# model 2 (controlling for season)
-lm(daily_mean ~ year, data = pm25_daily)
-#  model 3 (site differences)
+# model 1 (unadjusted temporal trend)
+lm(daily_mean ~ year, data = pm25_daily) 
+summary(model1)
+
+# model 2 (controlling for season and site)
 lm(daily_mean ~ year + season + site_name, data = pm25_daily)
+summary(model2)
+
+#  model 3 (site differences)
+lm(daily_mean ~ year * site_name, data = pm25_daily)
+summary(model3)
 
 # 17. Diurnal variations - 
 pm25_diurnal <- pm25_hourly %>%
   group_by(site_name, hour) %>%
   summarise(
-    mean_pm25 = mean(pm25, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
+   mean_pm25 = mean(pm25, na.rm = TRUE),
+   .groups = "drop")
+%>%
   mutate(plot_hour = ifelse(hour == 24, 0, hour))
