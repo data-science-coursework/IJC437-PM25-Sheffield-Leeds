@@ -15,7 +15,7 @@ site_cols <- c("Leeds Centre" = "#1f3c88",
 
 # Create plot 1: Annual trends 2017-2025
 ggplot(pm25_yearly,
-       aes(x = year, y = yearly_mean, colour = site_name)) +
+  aes(x = year, y = yearly_mean, colour = site_name)) +
   geom_line(linewidth = 1) +
   geom_point(size = 2) +
   scale_colour_manual(values = site_cols, name = "Monitoring site") +
@@ -23,7 +23,7 @@ ggplot(pm25_yearly,
     title = "Annual mean PM2.5 concentrations (2017–2025)",
     x = "Year",
     y = expression("PM2.5 ("*mu*"g/m"^3*")"))
-   + theme_minimal()
+     + theme_minimal()
 
 # Create plot 2: Seasonal means bar chart
 pm25_seasonal_overall <- pm25_seasonal_overall %>%
@@ -32,7 +32,7 @@ pm25_seasonal_overall <- pm25_seasonal_overall %>%
     levels = c("Winter", "Spring", "Summer", "Autumn")))
 
 ggplot(pm25_seasonal_overall,
-       aes(x = season, y = mean_pm25, fill = site_name)) +
+ aes(x = season, y = mean_pm25, fill = site_name)) +
   geom_col(position = position_dodge(width = 0.8), width = 0.7) +
   scale_fill_manual(values = site_cols, name = "Monitoring site") +
   labs(
