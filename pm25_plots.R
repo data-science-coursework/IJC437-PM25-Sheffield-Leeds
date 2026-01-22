@@ -15,7 +15,7 @@ site_cols <- c("Leeds Centre" = "#1f3c88",
 
 # Create plot 1: Annual trends 2017-2025
 ggplot(pm25_yearly,
-  aes(x = year, y = yearly_mean, colour = site_name)) +
+  aes(x = as.numeric(year), y = yearly_mean, colour = site_name)) +
   geom_line(linewidth = 1) +
   geom_point(size = 2) +
   scale_colour_manual(values = site_cols, name = "Monitoring site") +
