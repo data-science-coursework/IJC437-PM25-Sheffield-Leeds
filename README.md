@@ -12,7 +12,7 @@ This repository contains an analysis of PM2.5 concentrations in Sheffield and Le
   Project overview and instructions.
 
   # How to run the analysis
-  1. Download or clone this repository (raw data are included in `data/raw/`)
+  1. Download or clone this repository (data are included in `data/raw/`)
   2. OpenRStudio and set the working directory to the project root.
   3. Run `pm25_analysis.R` to process the data
   4. Run `pm25_plots.R` to generate all visualisations used in the report
