@@ -7,10 +7,10 @@ library(lubridate)
 library(ggplot2)
 
 # 2. Load raw data
-sheffield_barnsley_road <- read_csv("SHEFFIELD BARNSLEY ROAD.csv")
-sheffield_tinsley <- read_csv("SHEFFIELD TINSLEY.csv")
-leeds_centre <- read_csv("LEEDS CENTRE.csv")
-leeds_headingley_kerbside <- read_csv("LEEDS HEADINGLEY KERBSIDE.csv")
+sheffield_barnsley_road <- read_csv("data/raw/SHEFFIELD BARNSLEY ROAD.csv")
+sheffield_tinsley <- read_csv("data/raw/SHEFFIELD TINSLEY.csv")
+leeds_centre <- read_csv("data/raw/LEEDS CENTRE.csv")
+leeds_headingley_kerbside <- read_csv("data/raw/LEEDS HEADINGLEY KERBSIDE.csv")
 
 # 3. Add a column called site_name with the site name 
 sheffield_barnsley_road <- sheffield_barnsley_road %>%
@@ -46,8 +46,8 @@ pm25_daily <- pm25_hourly %>%
   summarise(
     daily_mean = mean(pm25, na.rm = TRUE),
     n_obs = sum(!is.na(pm25)),
-    .groups = "drop")
-   %>%
+    .groups = "drop"
+  ) %>%
   filter(n_obs >= 18)
 
 # 8. Add year and month columns
@@ -118,15 +118,15 @@ pm25_yearly <- pm25_daily %>%
 
 # 16. Conduct x3 regression models 
 # model 1 (unadjusted temporal trend)
-lm(daily_mean ~ year, data = pm25_daily) 
+model1 <- lm(daily_mean ~ year, data = pm25_daily) 
 summary(model1)
 
 # model 2 (controlling for season and site)
-lm(daily_mean ~ year + season + site_name, data = pm25_daily)
+model2 <- lm(daily_mean ~ year + season + site_name, data = pm25_daily)
 summary(model2)
 
 #  model 3 (site differences)
-lm(daily_mean ~ year * site_name, data = pm25_daily)
+model3 <- lm(daily_mean ~ year * site_name, data = pm25_daily)
 summary(model3)
 
 # 17. Diurnal variations - 
@@ -134,6 +134,6 @@ pm25_diurnal <- pm25_hourly %>%
   group_by(site_name, hour) %>%
   summarise(
    mean_pm25 = mean(pm25, na.rm = TRUE),
-   .groups = "drop")
-%>%
+   .groups = "drop"
+)  %>%
   mutate(plot_hour = ifelse(hour == 24, 0, hour))
