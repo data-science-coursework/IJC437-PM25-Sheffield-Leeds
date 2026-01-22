@@ -2,6 +2,7 @@
 This repository contains an analysis of PM2.5 concentrations in Sheffield and Leeds between 2017 and 2025, for the data science module IJC437
 # Repository contents
 - `data/raw/`
+
   Hourly PM2.5 datasets for years 2017-2025 for Sheffield Barnsley Road, Leeds Centre and Leeds Headingley Kerbside, 2022-2025 for Sheffield Tinsley.
 - `pm25_analysis.R`  
   Cleans hourly PM2.5 data, calculates daily means, seasonal and annual summaries, exceedances, and runs regression models.
